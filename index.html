@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Employee Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.js"></script>
+
+<script src="readfile1.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+
+    <script type="text/javascript">
+  var count=1;
+function myOnclick() {
+
+  if(count==1){
+
+ function addAllColumnHeaders(myList) {
+
+     var columnSet = [];
+
+     var headerTr$ = $('<tr/>');
+
+
+
+     for (var i = 0; i < myList.length; i++) {
+
+         var rowHash = myList[i];
+
+         for (var key in rowHash) {
+
+             if ($.inArray(key, columnSet) == -1) {
+
+                 columnSet.push(key);
+
+                 headerTr$.append($('<th scope="row"/>').html(key));
+
+             }
+
+         }
+
+     }
+
+     $("#jsonTable").append(headerTr$);
+
+
+
+     return columnSet;
+
+ }
+ $.getJSON("outputData.json", function (data) {
+
+     var columns = addAllColumnHeaders(data);
+
+
+     for (var i = 0; i < data.length; i++) {
+
+         var row$ = $('<tr/>');
+
+         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+             var cellValue = data[i][columns[colIndex]];
+
+
+
+             if (cellValue == null) { cellValue = ""; }
+
+
+
+             row$.append($('<td/>').html(cellValue));
+
+         }
+
+         $("#jsonTable").append(row$);
+
+     }
+
+ });
+ }
+ count++;
+
+}
+ </script>
+
+
+
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+
+    <div class="col-lg-12">
+
+       <button type="button" class="btn btn-primary btn-block" onclick="myOnclick()">Get Data</button>
+    </div>
+
+
+   <table class="table table-bordered table-inverse" id="jsonTable">
+
+       </table>
+
+     </div>
+
+</div>
+
+
+
+
+
+  </body>
+</html>

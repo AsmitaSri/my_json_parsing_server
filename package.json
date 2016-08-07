@@ -1,0 +1,11 @@
+{
+  "name": "myparser",
+  "version": "1.0.0",
+  "description": "csv to json parser",
+  "main": "readfile1.js",
+  "scripts": {
+    "test": "node readfile1.js"
+  },
+  "author": "asmitasri",
+  "license": "ISC"
+}
